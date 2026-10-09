@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Digital Shop Playbook · Free 30-Minute Product Finder</title>
-<meta name="description" content="Find a digital product that already sells on Etsy, in 30 minutes. Free guide from a seller with daily Etsy sales.">
+<meta name="description" content="The business with no boss, no inventory and no shipping. Free 30-minute guide: what to make first.">
 <meta property="og:title" content="The Digital Shop Playbook · Free 30-Minute Product Finder">
-<meta property="og:description" content="Find a digital product that already sells on Etsy, in 30 minutes. Free guide from a seller with daily Etsy sales.">
+<meta property="og:description" content="The business with no boss, no inventory and no shipping. Free 30-minute guide: what to make first.">
 <meta property="og:image" content="https://digitalshopplaybook.com/assets/scene4-sale.jpg">
 <meta property="og:url" content="https://digitalshopplaybook.com/">
 <link rel="canonical" href="https://digitalshopplaybook.com/">
@@ -42,6 +42,9 @@ input::placeholder{color:#7C8591}
 <style>html{scroll-behavior:smooth} img{max-width:100%} button:disabled{opacity:.7}</style>
 </head>
 <body>
+<style>@media (max-width:760px){.hdr-cta{display:none!important}}</style>
+
+
 <div class="page-pad" style="min-height: 100vh; background: #0F1216; color: #F2EEE8; font-family: 'Instrument Sans', system-ui, sans-serif; overflow: hidden">
 
   <header style="max-width: 1180px; margin: 0 auto; padding: 22px 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap">
@@ -49,23 +52,23 @@ input::placeholder{color:#7C8591}
       <span style="width: 30px; height: 30px; border-radius: 9px; background: #FF7A3D; display: inline-flex; align-items: center; justify-content: center; color: #0F1216; font-weight: 800; font-size: 16px">D</span>
       The Digital Shop Playbook
     </div>
-    <a href="#signup" style="height: 44px; padding: 0 18px; border-radius: 12px; border: 1px solid #333B45; color: #F2EEE8; font-weight: 600; font-size: 15px; text-decoration: none; display: inline-flex; align-items: center">Free guide</a>
+    <a class="hdr-cta" href="#signup" style="height: 44px; padding: 0 18px; border-radius: 12px; border: 1px solid #333B45; color: #F2EEE8; font-weight: 600; font-size: 15px; text-decoration: none; display: inline-flex; align-items: center">Free guide</a>
   </header>
 
-  <section style="max-width: 1180px; margin: 0 auto; padding: 40px 20px 72px; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
+  <section style="max-width: 1180px; margin: 0 auto; padding: 18px 20px 64px; display: flex; flex-wrap: wrap; gap: 44px; align-items: center">
     <div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
       <div style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #1C2128; border: 1px solid #2B323B; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #FFB08A">
         <span style="width: 8px; height: 8px; border-radius: 999px; background: #FF7A3D"></span>
-        Free guide for Etsy sellers
+        Free 30-minute guide
       </div>
-      <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(40px, 6vw, 68px); line-height: 1.02; letter-spacing: -0.03em">Find a digital product that <span style="color: #FF7A3D">already sells</span>. In 30 minutes.</h1>
-      <p style="margin: 0; font-size: clamp(17px, 2vw, 20px); line-height: 1.55; color: #C3C9D1; max-width: 560px">Stop guessing what to make. This free guide shows the exact research method I use to pick products for my own Etsy shop, so you build something people are already buying.</p>
+      <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(34px, 6vw, 64px); line-height: 1.04; letter-spacing: -0.03em">The business with <span style="color: #FF7A3D">no boss, no inventory</span> &amp; no shipping.</h1>
+      <p style="margin: 0; font-size: clamp(17px, 2vw, 20px); line-height: 1.55; color: #C3C9D1; max-width: 560px">You make a product once with AI, and sell it again and again. Every order is 100% profit. This free guide shows you exactly what to make first, in 30 minutes.</p>
       <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 4px">
-        <a href="#signup" style="height: 58px; padding: 0 28px; border-radius: 14px; background: #FF7A3D; color: #0F1216; font-weight: 800; font-size: 17px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-sizing: border-box">
-          Get the free guide
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg>
-        </a>
-        <a href="#story" style="font-size: 16px; font-weight: 600; color: #C3C9D1">See how it started ↓</a>
+        <form id="hero-form" class="js-signup" novalidate style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; max-width: 560px">
+          <input id="hero-email" name="email" type="email" required autocomplete="email" inputmode="email" placeholder="Your email address" aria-label="Your email address" style="flex: 1 1 240px; min-width: 0; height: 60px; padding: 0 18px; border-radius: 14px; border: 1px solid #3A424D; background: #171B21; color: #F2EEE8; font-size: 17px; font-family: inherit; box-sizing: border-box">
+          <button type="submit" style="flex: 1 1 220px; height: 60px; padding: 0 22px; border-radius: 14px; border: 0; cursor: pointer; background: #FF7A3D; color: #0F1216; font-weight: 800; font-size: 17px; font-family: inherit; display: inline-flex; align-items: center; justify-content: center; gap: 8px">Send me the free guide <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+          <p style="flex: 1 1 100%; margin: 2px 0 0; font-size: 13px; line-height: 1.5; color: #8D96A1">Free PDF, in your inbox in 1 minute. No spam, unsubscribe anytime. <a href="legal.html#privacy">Privacy</a></p>
+        </form>
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 18px; font-size: 14px; color: #A7AFB9">
         <span style="display: inline-flex; align-items: center; gap: 6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF7A3D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>100% free</span>
@@ -144,7 +147,7 @@ input::placeholder{color:#7C8591}
         <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(30px, 4vw, 46px); line-height: 1.04; letter-spacing: -0.03em">Get The 30-Minute Product Finder.</h2>
         <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C3C9D1">The exact research method from scene 02, as a free PDF. Enter your email and it lands in your inbox in under a minute.</p>
       </div>
-      <form id="signup-form" novalidate style="position: relative; flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+      <form id="signup-form" class="js-signup" novalidate style="position: relative; flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
         <label for="email" style="font-size: 15px; font-weight: 600; color: #DDE2E8">Your email</label>
         <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@email.com" style="height: 60px; padding: 0 20px; border-radius: 14px; border: 1px solid #3A424D; background: #0F1216; color: #F2EEE8; font-size: 18px; font-family: inherit; box-sizing: border-box; width: 100%">
         <button type="submit" style="height: 60px; border-radius: 14px; background: #FF7A3D; color: #0F1216; font-weight: 800; font-size: 18px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; border: 0; cursor: pointer; font-family: inherit; width: 100%">
@@ -241,9 +244,12 @@ document.addEventListener('DOMContentLoaded', function () {
   try { fetch('https://assets.mailerlite.com/jsonp/2692078/forms/200667220518372767/takel', { mode: 'no-cors' }); } catch (e) {}
   var form = document.getElementById('signup-form');
   if (!form) return;
+  document.querySelectorAll('form.js-signup').forEach(function (f) { if (f !== form) bind(f); });
+  bind(form);
+  function bind(form) {
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var email = document.getElementById('email');
+    var email = form.querySelector('input[type=email]');
     if (!email.value || !email.checkValidity()) { email.focus(); email.reportValidity(); return; }
     var btn = form.querySelector('button[type=submit]');
     btn.disabled = true; btn.textContent = 'Sending...';
@@ -258,6 +264,7 @@ document.addEventListener('DOMContentLoaded', function () {
     setTimeout(finish, 4000);
     fetch(MAILERLITE_ACTION, { method: 'POST', body: data, mode: 'no-cors' }).then(finish, finish);
   });
+  }
 });
 </script>
 </body>
