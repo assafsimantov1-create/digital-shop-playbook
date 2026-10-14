@@ -398,7 +398,52 @@ summary::-webkit-details-marker{display:none}
   </div>
 </div>
 
-<script src="https://gumroad.com/js/gumroad.js"></script>
+<script>
+(function () {
+  var START = Date.parse('2026-10-14T14:00:00Z'), END = Date.parse('2026-10-16T04:00:00Z');
+  var now = Date.now(), preview = /[?&]sale=preview/.test(location.search);
+  if (!preview && (now < START || now >= END)) return;
+  window.__SALE = true;
+  var CODE = 'LAUNCH50', NEW = {'19': '9.50', '39': '19.50', '79': '39.50'};
+  // 1) buy links get the discount code
+  // (?wanted=true / overlay checkout can drop auto-applied codes, so during the sale we link straight to the product page)
+  document.querySelectorAll('a[href*="gumroad.com/l/"]').forEach(function (a) {
+    var m = a.href.match(/^(https:\/\/[^\/]+\/l\/[a-z0-9]+)/i);
+    if (!m) return;
+    a.href = m[1] + '/' + CODE + '?offer_code=' + CODE;
+    a.removeAttribute('data-gumroad-overlay-checkout');
+  });
+  // 2) prices: big price blocks and table cells get a struck-through old price
+  var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT), nodes = [], n;
+  while ((n = walker.nextNode())) nodes.push(n);
+  nodes.forEach(function (t) {
+    var s = t.nodeValue, m = s.trim().match(/^\$(19|39|79)$/);
+    if (m) {
+      var el = t.parentNode;
+      el.innerHTML = '<s style="opacity:.45;font-size:.55em;font-weight:700;margin-right:.25em">$' + m[1] + '</s>$' + NEW[m[1]];
+      return;
+    }
+    if (/\$(19|39|79)\b/.test(s)) {
+      t.nodeValue = s.replace(/From \$19 · one-time payment/, 'From $9.50 · 50% off launch week')
+                     .replace(/\$(19|39|79)\b/g, function (_, p) { return '$' + NEW[p]; });
+    }
+  });
+  // 3) banner with live countdown
+  var bar = document.createElement('div');
+  bar.setAttribute('role', 'status');
+  bar.style.cssText = 'position:sticky;top:0;z-index:60;background:#FF7A3D;color:#0F1216;font-weight:800;font-size:15px;line-height:1.35;text-align:center;padding:10px 16px;font-family:Instrument Sans, system-ui, sans-serif;font-variant-numeric:tabular-nums';
+  bar.innerHTML = '🔥 Launch week: <b>50% off every plan</b> · ends in <span id="sale-cd"></span>';
+  document.body.insertBefore(bar, document.body.firstChild);
+  var cd = document.getElementById('sale-cd');
+  function tick() {
+    var ms = Math.max(0, END - Date.now()), h = Math.floor(ms / 3.6e6), m = Math.floor(ms % 3.6e6 / 6e4), s = Math.floor(ms % 6e4 / 1e3);
+    cd.textContent = (h >= 24 ? Math.floor(h / 24) + 'd ' + (h % 24) + 'h ' : h + 'h ') + (m < 10 ? '0' : '') + m + 'm ' + (s < 10 ? '0' : '') + s + 's';
+    if (ms <= 0 && !preview) location.reload();
+  }
+  tick(); setInterval(tick, 1000);
+})();
+</script>
+<script>if (!window.__SALE) { var g = document.createElement("script"); g.src = "https://gumroad.com/js/gumroad.js"; document.body.appendChild(g); }</script>
 <script>
 try { fbq('track', 'ViewContent', {content_name: 'The Digital Shop Playbook', content_type: 'product'}); } catch (e) {}
 document.addEventListener('click', function (e) {
