@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!email.value || !email.checkValidity()) { email.focus(); email.reportValidity(); return; }
     var btn = form.querySelector('button[type=submit]');
     btn.disabled = true; btn.textContent = 'Sending...';
-    var go = function () { window.location.href = 'offer.html'; };
+    var go = function () { window.location.href = 'offer.html?welcome=1'; };
     if (!MAILERLITE_ACTION) { go(); return; }
     try { if (window.fbq) fbq('track', 'Lead', {content_name: 'The 30-Minute Product Finder'}); } catch (e) {}
     var data = new URLSearchParams();

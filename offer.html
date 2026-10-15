@@ -398,6 +398,63 @@ summary::-webkit-details-marker{display:none}
   </div>
 </div>
 
+<style>
+#oto{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(8,10,13,.72);backdrop-filter:blur(3px)}
+#oto.on{display:flex}
+#oto .box{position:relative;width:100%;max-width:440px;max-height:calc(100vh - 32px);overflow:auto;background:#0F1216;color:#F2EEE8;border:1px solid #2B323B;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.5);font-family:'Instrument Sans',system-ui,sans-serif;animation:otoIn .35s ease}
+@keyframes otoIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+#oto .img{height:170px;background:url(assets/scene3-build.jpg) center 30%/cover;border-radius:20px 20px 0 0}
+#oto .in{padding:20px 22px 22px}
+#oto .tag{display:inline-block;padding:5px 11px;border-radius:999px;background:#FF7A3D;color:#0F1216;font-weight:800;font-size:11px;letter-spacing:.1em}
+#oto h2{margin:12px 0 6px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;line-height:1.1;letter-spacing:-.02em}
+#oto h2 span{color:#FF7A3D}
+#oto p{margin:0 0 12px;color:#C3C9D1;font-size:15px;line-height:1.5}
+#oto ul{list-style:none;padding:0;margin:0 0 16px}
+#oto li{position:relative;padding-left:24px;margin:7px 0;font-size:15px;line-height:1.4}
+#oto li:before{content:"✓";position:absolute;left:0;color:#FF7A3D;font-weight:800}
+#oto .buy{display:flex;align-items:center;justify-content:center;height:54px;border-radius:14px;background:#FF7A3D;color:#0F1216;font-weight:800;font-size:17px;text-decoration:none}
+#oto .no{display:block;width:100%;margin-top:10px;padding:8px;border:0;background:none;color:#8D96A1;font-size:14px;text-decoration:underline;cursor:pointer;font-family:inherit}
+#oto .x{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(15,18,22,.75);color:#F2EEE8;font-size:20px;line-height:36px;cursor:pointer}
+#oto .fine{margin:8px 0 0;text-align:center;color:#8D96A1;font-size:12px}
+</style>
+<div id="oto" role="dialog" aria-modal="true" aria-labelledby="oto-t">
+  <div class="box">
+    <button class="x" type="button" aria-label="Close">×</button>
+    <div class="img" aria-hidden="true"></div>
+    <div class="in">
+      <span class="tag">ONE-TIME OFFER · NEW SUBSCRIBERS</span>
+      <h2 id="oto-t">Skip the blank page: <span>The First Product Kit</span></h2>
+      <p>Your free guide helps you pick a niche. This kit gets you from that niche to a live listing, fast.</p>
+      <ul>
+        <li>40 product types that sell as digital downloads</li>
+        <li>25 copy-paste AI prompts: idea → product → images → listing</li>
+        <li>Fill-in listing template + 15-point launch checklist</li>
+      </ul>
+      <a class="buy" href="https://restiq45.gumroad.com/l/firstkit" target="_blank" rel="noopener">Yes, I want the kit · $7</a>
+      <button class="no" type="button">No thanks, take me to my free guide</button>
+      <p class="fine">Instant PDF download · 14-day money-back guarantee</p>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  if (!/[?&]welcome=1/.test(location.search)) return;
+  try { if (sessionStorage.getItem('oto_seen')) return; sessionStorage.setItem('oto_seen', '1'); } catch (e) {}
+  var m = document.getElementById('oto');
+  function close() { m.classList.remove('on'); document.body.style.overflow = ''; }
+  m.querySelector('.x').onclick = close;
+  m.querySelector('.no').onclick = close;
+  m.addEventListener('click', function (e) { if (e.target === m) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  m.querySelector('.buy').addEventListener('click', function () {
+    try { fbq('track', 'InitiateCheckout', {content_name: 'First Product Kit', value: 7, currency: 'USD'}); } catch (e) {}
+  });
+  setTimeout(function () {
+    m.classList.add('on'); document.body.style.overflow = 'hidden';
+    try { fbq('trackCustom', 'KitOfferView'); } catch (e) {}
+  }, 1200);
+})();
+</script>
 <script>
 (function () {
   var START = Date.parse('2026-10-14T14:00:00Z'), END = Date.parse('2026-10-16T04:00:00Z');
@@ -408,7 +465,7 @@ summary::-webkit-details-marker{display:none}
   // 1) buy links get the discount code
   // (?wanted=true / overlay checkout can drop auto-applied codes, so during the sale we link straight to the product page)
   document.querySelectorAll('a[href*="gumroad.com/l/"]').forEach(function (a) {
-    var m = a.href.match(/^(https:\/\/[^\/]+\/l\/[a-z0-9]+)/i);
+    var m = a.href.match(/^(https:\/\/[^\/]+\/l\/(?:gzast|uqstk|ejcplp))(?:[?\/]|$)/i);
     if (!m) return;
     a.href = m[1] + '/' + CODE + '?offer_code=' + CODE;
     a.removeAttribute('data-gumroad-overlay-checkout');
@@ -449,7 +506,7 @@ try { fbq('track', 'ViewContent', {content_name: 'The Digital Shop Playbook', co
 document.addEventListener('click', function (e) {
   var a = e.target.closest && e.target.closest('a[href*="gumroad.com/l/"]');
   if (!a) return;
-  var tiers = {gzast: ['Starter', 19], uqstk: ['Growth', 39], ejcplp: ['Pro', 79]};
+  var tiers = {gzast: ['Starter', 19], uqstk: ['Growth', 39], ejcplp: ['Pro', 79], firstkit: ['First Product Kit', 7]};
   var m = a.href.match(/gumroad\.com\/l\/([a-z0-9]+)/i), t = m && tiers[m[1]];
   try { fbq('track', 'InitiateCheckout', {content_name: t ? t[0] : 'Playbook', value: t ? t[1] : 0, currency: 'USD'}); } catch (err) {}
 }, true);
