@@ -106,9 +106,9 @@ footer{margin-top:40px;font-size:13px;color:#7C8591}
 
   <div id="thanks" class="thanks">
     <div class="pill"><i></i> Sent</div>
-    <p class="big" style="margin-top:16px">Check your inbox — it's on its way.</p>
-    <p class="lead">Can't wait? Grab it right here too. Then score your first niche tonight.</p>
-    <a class="btn2" href="assets/5-Signal-Niche-Checklist.pdf" target="_blank" rel="noopener">Download the checklist (PDF)</a>
+    <p class="big" style="margin-top:16px">Your checklist is ready.</p>
+    <p class="lead">It should have opened in a new tab. If it didn't, tap the button. I also emailed you a copy (if it's not there in a minute, check the promotions/spam folder and confirm the email).</p>
+    <a class="btn3" style="margin-left:0;height:58px;font-size:17px" href="assets/5-Signal-Niche-Checklist.pdf" target="_blank" rel="noopener">⬇ Download the checklist (PDF)</a>
     <div class="card" style="margin-top:26px;display:flex;gap:18px;flex-wrap:wrap;align-items:center">
       <img src="assets/playbook-3in1.jpg" alt="The Etsy Digital Shop Playbook, 3 books" style="width:150px;border-radius:12px">
       <div style="flex:1 1 260px">
@@ -135,7 +135,8 @@ document.addEventListener('DOMContentLoaded', function () {
       var email = form.querySelector('input[type=email]');
       if (!email.value || !email.checkValidity()) { email.focus(); email.reportValidity(); return; }
       var btn = form.querySelector('button[type=submit]');
-      btn.disabled = true; btn.textContent = 'Sending...';
+      btn.disabled = true; btn.textContent = 'Opening your checklist...';
+      try { window.open('assets/5-Signal-Niche-Checklist.pdf', '_blank'); } catch (e) {}
       try { if (window.fbq) fbq('track', 'Lead', {content_name: '5-Signal Niche Checklist'}); } catch (e) {}
       var data = new URLSearchParams();
       data.append('fields[email]', email.value);
