@@ -63,6 +63,20 @@ button:disabled{opacity:.7}
 .btn2{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 20px;border-radius:12px;background:#F2EEE8;color:#0F1216;font-weight:700;text-decoration:none;margin-top:8px}
 .btn3{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 20px;border-radius:12px;background:#FF7A3D;color:#0F1216;font-weight:700;text-decoration:none;margin-top:8px;margin-left:8px}
 footer{margin-top:40px;font-size:13px;color:#7C8591}
+
+.ov{position:fixed;inset:0;background:rgba(8,10,12,.78);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
+.ov.show{display:flex;animation:fi .25s ease}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+@keyframes up{from{transform:translateY(30px) scale(.96);opacity:0}to{transform:none;opacity:1}}
+.md{background:#151A20;border:1px solid #2B323B;border-radius:22px;max-width:440px;width:100%;padding:24px 22px 20px;text-align:center;position:relative;animation:up .35s cubic-bezier(.2,1.3,.4,1)}
+.md .cl{position:absolute;right:14px;top:10px;background:none;border:0;color:#7C8591;font-size:28px;height:auto;padding:4px 8px;cursor:pointer}
+.md img{width:190px;border-radius:14px;margin:4px auto 14px;display:block}
+.md .k{font-size:12px;letter-spacing:.18em;color:#5BE49B;font-weight:700}
+.md h3{font-family:'Bricolage Grotesque',sans-serif;font-size:26px;line-height:1.1;letter-spacing:-.02em;margin:8px 0 10px}
+.md p{color:#A8B2BD;font-size:15px;line-height:1.5;margin:0 0 16px}
+.md .buy{display:flex;align-items:center;justify-content:center;height:58px;border-radius:14px;background:#FF7A3D;color:#0F1216;font-weight:800;font-size:18px;text-decoration:none}
+.md .price{font-size:14px;color:#7C8591;margin-top:8px}
+.md .skip{display:inline-block;margin-top:12px;font-size:14px;color:#7C8591;text-decoration:underline;cursor:pointer}
 </style>
 </head>
 <body>
@@ -122,12 +136,28 @@ footer{margin-top:40px;font-size:13px;color:#7C8591}
   <footer>© The Digital Shop Playbook · <a href="legal.html">Legal</a> · Real numbers from my own shop; your results depend on your niche and execution.</footer>
 </div>
 
+<div class="ov" id="offer"><div class="md">
+  <button class="cl" id="ofx" aria-label="Close">×</button>
+  <div class="k">✓ CHECKLIST SENT TO YOUR INBOX</div>
+  <h3>Want the whole system, not just step one?</h3>
+  <img src="assets/playbook-3in1.jpg" alt="The Etsy Digital Shop Playbook">
+  <p>3 books, ~100 pages: find the niche, build the product with AI in one evening (8 copy‑paste prompts), and list it so it sells.</p>
+  <a class="buy" id="ofb" href="https://payhip.com/b/0PK5W">Get the Playbook — $47 →</a>
+  <div class="price">Instant download · lifetime access</div>
+  <a class="skip" id="ofs">No thanks, just give me the free checklist</a>
+</div></div>
 <script>
 var MAILERLITE_ACTION = "https://assets.mailerlite.com/jsonp/2692078/forms/204008253599778287/subscribe";
 document.addEventListener('DOMContentLoaded', function () {
   try { fetch('https://assets.mailerlite.com/jsonp/2692078/forms/204008253599778287/takel', { mode: 'no-cors' }); } catch (e) {}
   if (location.search.indexOf('sent=1') > -1) { showThanks(); }
   document.querySelectorAll('form').forEach(bind);
+  function showOffer(){ document.getElementById('offer').classList.add('show'); try { if (window.fbq) fbq('track','ViewContent',{content_name:'Playbook offer popup'}); } catch(e){} }
+  function hideOffer(){ document.getElementById('offer').classList.remove('show'); }
+  document.getElementById('ofx').onclick=hideOffer;
+  document.getElementById('ofs').onclick=function(){ hideOffer(); window.open('assets/5-Signal-Niche-Checklist.pdf','_blank'); };
+  document.getElementById('offer').addEventListener('click',function(e){ if(e.target.id==='offer') hideOffer(); });
+  document.getElementById('ofb').onclick=function(){ try { if (window.fbq) fbq('track','InitiateCheckout',{value:47,currency:'USD'}); } catch(e){} };
   function showThanks(){ document.getElementById('main').style.display='none'; document.getElementById('thanks').classList.add('show'); window.scrollTo(0,0); }
   function bind(form) {
     form.addEventListener('submit', function (e) {
@@ -135,14 +165,13 @@ document.addEventListener('DOMContentLoaded', function () {
       var email = form.querySelector('input[type=email]');
       if (!email.value || !email.checkValidity()) { email.focus(); email.reportValidity(); return; }
       var btn = form.querySelector('button[type=submit]');
-      btn.disabled = true; btn.textContent = 'Opening your checklist...';
-      try { window.open('assets/5-Signal-Niche-Checklist.pdf', '_blank'); } catch (e) {}
+      btn.disabled = true; btn.textContent = 'Sending...';
       try { if (window.fbq) fbq('track', 'Lead', {content_name: '5-Signal Niche Checklist'}); } catch (e) {}
       var data = new URLSearchParams();
       data.append('fields[email]', email.value);
       data.append('ml-submit', '1');
       data.append('anticsrf', 'true');
-      var done = false; var finish = function () { if (!done) { done = true; showThanks(); } };
+      var done = false; var finish = function () { if (!done) { done = true; showThanks(); showOffer(); } };
       setTimeout(finish, 4000);
       fetch(MAILERLITE_ACTION, { method: 'POST', body: data, mode: 'no-cors' }).then(finish, finish);
     });
